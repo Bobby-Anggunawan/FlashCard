@@ -32,10 +32,16 @@ dependencies:
   flutter:
     sdk: flutter
 
+  carassius_blueprint:
+    git:
+      url: https://github.com/Bobby-Anggunawan/carassius_blueprint.git
+      ref: 8ce86bb
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+
+  sqflite: ^2.3.0
 
 dev_dependencies:
   flutter_test:
