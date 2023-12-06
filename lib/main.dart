@@ -1,6 +1,7 @@
 import 'package:carassius_blueprint/carassius_blueprint.dart';
 import 'package:flashcard/UI/Decks/DecksPage.dart';
 import 'package:flashcard/UI/SplashPage.dart';
+import 'package:flashcard/UI/TestPage.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,7 +15,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return KoiScaffold(
         routes: KoiScaffoldRoute
-            .baseRoute(SplashPage())
+            //.baseRoute(SplashPage())
+            .baseRoute(TestPage())
             .addRoutes("/decks", DecksPage())
         ,
         themeColor: ThemeColor.autoGenerateFromColor(Colors.black87)

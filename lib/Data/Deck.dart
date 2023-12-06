@@ -18,8 +18,10 @@ class Deck{
 /// **NOTE** kalo mau akses, dari *DatabaseTable* saja
 class DeckDB{
   late String tableName;
-  DeckDB(_tableName){
+  late Database db;
+  DeckDB(String _tableName, Database _db){
     tableName = _tableName;
+    db = _db;
   }
 
   Future<void> createTable(Database db)async{
@@ -33,13 +35,13 @@ class DeckDB{
       "description": description,
       "icon": icon
     };
-    var id = await DatabaseTable.db.insert(tableName, build);
+    var id = await db.insert(tableName, build);
 
     return Deck(id, name, description, icon);
   }
 
   Future<List<Deck>> getDeckList()async{
-    var result = await DatabaseTable.db.query(tableName);
+    var result = await db.query(tableName);
 
     return List.generate(result.length, (index){
       return Deck(
