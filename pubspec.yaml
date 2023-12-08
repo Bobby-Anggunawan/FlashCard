@@ -35,7 +35,7 @@ dependencies:
   carassius_blueprint:
     git:
       url: https://github.com/Bobby-Anggunawan/carassius_blueprint.git
-      ref: f669d2f
+      ref: 06fb9ef
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

@@ -1,4 +1,5 @@
 import "package:carassius_blueprint/carassius_blueprint.dart";
+import "package:flashcard/Data/DatabaseTable.dart";
 import "package:flutter/material.dart";
 
 class DialogCreateDeck extends StatelessWidget {
@@ -15,6 +16,10 @@ class DialogCreateDeck extends StatelessWidget {
     Icons.key: "Key",
   };
 
+  final TextEditingController _namaDeck = TextEditingController();
+  final TextEditingController _deskripsiDeck = TextEditingController();
+  final ValueNotifier<int?> _iconTerpilih = ValueNotifier(null);
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -24,12 +29,14 @@ class DialogCreateDeck extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           TextField(
+            controller: _namaDeck,
             decoration: InputDecoration(
               border: OutlineInputBorder(),
               labelText: 'Nama Deck',
             ),
           ),
           TextField(
+            controller: _deskripsiDeck,
             maxLines: 3,
             decoration: InputDecoration(
               border: OutlineInputBorder(),
@@ -38,6 +45,9 @@ class DialogCreateDeck extends StatelessWidget {
           ),
 
           DropdownMenu(
+            onSelected: (newValue){
+              _iconTerpilih.value = newValue?.codePoint;
+            },
             label: Text("Icon Deck"),
             inputDecorationTheme: InputDecorationTheme(
               border: OutlineInputBorder(),
@@ -55,11 +65,21 @@ class DialogCreateDeck extends StatelessWidget {
       actions: [
         TextButton(
           child: Text("Batal"),
-          onPressed: (){}
+          onPressed: (){
+            Navigator.of(context).pop();
+          }
         ),
         TextButton(
             child: Text("Ok"),
-            onPressed: (){}
+            onPressed: (){
+              DatabaseTable.tableDeck.createNewDeck(_namaDeck.text, _deskripsiDeck.text, _iconTerpilih.value)
+                  .then((value){
+                    KoiScaffold.showToast("Deck ${value.name} berhasil dibuat");
+                    Navigator.of(context).pop();
+                  }).onError((error, stackTrace){
+                    KoiScaffold.showToast("Error saat membuat deck!!!");
+                  });
+            }
         ),
       ],
     );

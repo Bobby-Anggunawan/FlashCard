@@ -27,16 +27,15 @@ class ListOfDeck extends StatelessWidget {
               color: index%2==0? Colors.purple : Colors.indigo,
             );
           }).koiJoinList([
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 24),
-              child: FilledButton.icon(
-                  icon: Icon(Icons.add),
-                  label: Text("Deck Baru"),
-                  onPressed: (){
-                    showDialog(context: context, builder: (context){
-                      return DialogCreateDeck();
-                    });
-                  }
+            TextButton(
+              onPressed: (){
+                showDialog(context: context, builder: (context){
+                  return DialogCreateDeck();
+                });
+              },
+              child: ListTile(
+                leading: Icon(Icons.add),
+                title: Text("Deck Baru"),
               ),
             )
           ]),

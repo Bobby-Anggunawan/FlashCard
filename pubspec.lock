@@ -21,8 +21,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: f669d2f
-      resolved-ref: f669d2f912498fe5e493ca8351abb0022b575ae5
+      ref: "06fb9ef"
+      resolved-ref: "06fb9ef0ecf36195867c488d9522fcef41ee17cb"
       url: "https://github.com/Bobby-Anggunawan/carassius_blueprint.git"
     source: git
     version: "0.0.1"
