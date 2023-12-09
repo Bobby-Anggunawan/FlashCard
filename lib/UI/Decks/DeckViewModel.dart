@@ -13,11 +13,11 @@ class DeckViewModel{
 
   // diinit dengan data dummy
   ValueNotifier<List<Deck>> decks = ValueNotifier([
-    Deck(1, "name1", "description 1", Icons.add.codePoint),
-    Deck(2, "name2", "description 2", Icons.ac_unit.codePoint),
-    Deck(3, "name3", "description 3", Icons.add_a_photo_rounded.codePoint),
-    Deck(4, "name4", "description 4", Icons.abc_outlined.codePoint),
-    Deck(5, "name5", "description 5", Icons.dashboard.codePoint),
+    Deck(1, "name1", "description 1", Icons.add.codePoint, true),
+    Deck(2, "name2", "description 2", Icons.ac_unit.codePoint, false),
+    Deck(3, "name3", "description 3", Icons.add_a_photo_rounded.codePoint, false),
+    Deck(4, "name4", "description 4", Icons.abc_outlined.codePoint, true),
+    Deck(5, "name5", "description 5", Icons.dashboard.codePoint, false),
   ]);
 
   Future<void> fetchDecks()async{

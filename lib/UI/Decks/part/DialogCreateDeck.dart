@@ -19,6 +19,7 @@ class DialogCreateDeck extends StatelessWidget {
   final TextEditingController _namaDeck = TextEditingController();
   final TextEditingController _deskripsiDeck = TextEditingController();
   final ValueNotifier<int?> _iconTerpilih = ValueNotifier(null);
+  final ValueNotifier<bool> _isDeckInCardMode = ValueNotifier(false);
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +60,37 @@ class DialogCreateDeck extends StatelessWidget {
                   value: availableIcons.keys.toList()[index]
               );
             }),
+          ),
+
+          ValueListenableBuilder(
+              valueListenable: _isDeckInCardMode,
+              builder: (context, value, child){
+                return Row(
+                  children: [
+                    Expanded(
+                      child: SegmentedButton<bool>(
+                        onSelectionChanged: (newValue){
+                          _isDeckInCardMode.value = newValue.first;
+                        },
+                        selectedIcon: Icon(value ? Icons.style : Icons.label),
+                        segments: [
+                          ButtonSegment(
+                            value: true,
+                            label: Text("Card Mode"),
+                            icon: Icon(Icons.style_outlined)
+                          ),
+                          ButtonSegment(
+                              value: false,
+                              label: Text("Label Mode"),
+                              icon: Icon(Icons.label_outline)
+                          ),
+                        ],
+                        selected: <bool>{value},
+                      )
+                    )
+                  ],
+                );
+              }
           )
         ].koiAddSpacing(axis: Axis.vertical),
       ),
@@ -72,7 +104,7 @@ class DialogCreateDeck extends StatelessWidget {
         TextButton(
             child: Text("Ok"),
             onPressed: (){
-              DatabaseTable.tableDeck.createNewDeck(_namaDeck.text, _deskripsiDeck.text, _iconTerpilih.value)
+              DatabaseTable.tableDeck.createNewDeck(_namaDeck.text, _deskripsiDeck.text, _iconTerpilih.value, _isDeckInCardMode.value)
                   .then((value){
                     KoiScaffold.showToast("Deck ${value.name} berhasil dibuat");
                     Navigator.of(context).pop();
